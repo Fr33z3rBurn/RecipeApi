@@ -1,9 +1,21 @@
+using RecipeApi.Models;
+using RecipeApi.Services;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.Configure<RecipeDatabaseSettings>(
+				builder.Configuration.GetSection(nameof(RecipeDatabaseSettings)));
+
+builder.Services.AddSingleton<RecipeDatabaseSettings>(sp =>
+	sp.GetRequiredService<IOptions<RecipeDatabaseSettings>>().Value);
+
+builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
