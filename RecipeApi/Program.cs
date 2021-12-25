@@ -12,10 +12,10 @@ builder.Services.AddControllers();
 builder.Services.Configure<RecipeDatabaseSettings>(
 				builder.Configuration.GetSection(nameof(RecipeDatabaseSettings)));
 
-builder.Services.AddSingleton<RecipeDatabaseSettings>(sp =>
+builder.Services.AddSingleton<IRecipeDatabaseSettings>(sp =>
 	sp.GetRequiredService<IOptions<RecipeDatabaseSettings>>().Value);
 
-builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddSingleton<IRecipeService, RecipeService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
