@@ -16,7 +16,18 @@ namespace RecipeApi.Services
 
 		public void CreateRecipe(Recipe recipe)
 		{
+			//TODO Map so there is a GUID
 			recipes.InsertOne(recipe);
+		}
+
+		public void DeleteRecipe(Guid id)
+		{
+			var recipe = recipes.Find(r => r.Id == id.ToString()).FirstOrDefault();
+			
+			if (recipe != null)
+			{
+				recipes.DeleteOne(r => r.Id == recipe.Id);
+			}
 		}
 	}
 }
