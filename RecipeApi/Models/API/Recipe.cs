@@ -2,8 +2,8 @@
 {
 	public class Recipe
 	{
-		public string Id { get; set; } = Guid.NewGuid().ToString("n");
-		public string OwnerUserId { get; set; }
+		public Guid Id { get; set; }
+		public Guid OwnerUserId { get; set; }
 		public bool IsPoolRecipe { get; set; }
 		public bool CreatedFromPool { get; set; }
 		public string RecipeName { get; set; }
