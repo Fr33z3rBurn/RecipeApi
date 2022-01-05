@@ -32,5 +32,21 @@ namespace RecipeApi.Services
 				recipes.DeleteOne(r => r.Id == recipe.Id);
 			}
 		}
+
+		public void UpdateRecipe(string name, Recipe recipeDto)
+		{
+			var existingRecipeId = recipes.Find(r => r.RecipeName == name).SingleOrDefault().Id;
+			var recipe = RecipeServiceUtils.MapDtoToDb(recipeDto);
+			
+			recipes.ReplaceOne(r => r.Id == existingRecipeId, recipe);
+		}
+
+		public Recipe GetRecipe(string name)
+		{
+			var recipe = recipes.Find(r => r.RecipeName == name).Single();
+			
+			return RecipeServiceUtils.MapToRecipeDto(recipe);
+
+		}
 	}
 }

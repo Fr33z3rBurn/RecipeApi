@@ -6,5 +6,7 @@ namespace RecipeApi.Services
 	{
 		void CreateRecipe(Recipe recipe);
 		void DeleteRecipe(string name);
+		void UpdateRecipe(string name, Recipe recipeDto);
+		Recipe GetRecipe(string name);
 	}
 }

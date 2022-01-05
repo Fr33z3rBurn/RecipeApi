@@ -8,6 +8,7 @@ namespace RecipeApi.Services
 		{
 			var db = new RecipeDb()
 			{
+				Id = recipe.Id,
 				OwnerUserId = recipe.OwnerUserId,
 				IsPoolRecipe = recipe.IsPoolRecipe,
 				CreatedFromPool	= recipe.CreatedFromPool,
@@ -25,6 +26,30 @@ namespace RecipeApi.Services
 			};
 
 			return db;
+		}
+
+		public static Recipe MapToRecipeDto(RecipeDb recipeDb)
+		{
+			var dto = new Recipe()
+			{
+				Id = recipeDb.Id,
+				OwnerUserId = recipeDb.OwnerUserId,
+				IsPoolRecipe = recipeDb.IsPoolRecipe,
+				CreatedFromPool = recipeDb.CreatedFromPool,
+				RecipeName = recipeDb.RecipeName,
+				RecipeNationality = recipeDb.RecipeNationality,
+				Ingredients = recipeDb.Ingredients,
+				Steps = recipeDb.Steps,
+				PrepTimeMinutes = recipeDb.PrepTimeMinutes,
+				CookTimeMinutes = recipeDb.CookTimeMinutes,
+				ReadyInMinutes = recipeDb.ReadyInMinutes,
+				Creator = recipeDb.Creator,
+				Notes = recipeDb.Notes,
+				OriginalSource = recipeDb.OriginalSource,
+				ApprovalStatus = recipeDb.ApprovalStatus
+			};
+
+			return dto;
 		}
 	}
 }

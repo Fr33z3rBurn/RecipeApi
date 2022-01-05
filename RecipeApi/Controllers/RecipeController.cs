@@ -23,10 +23,10 @@ namespace RecipeApi.Controllers
 		}
 
 		// GET api/<RecipeController>/5
-		[HttpGet("{id}")]
-		public string Get(int id)
+		[HttpGet("{name}")]
+		public Recipe Get(string name)
 		{
-			return "value";
+			return _recipeService.GetRecipe(name);
 		}
 
 		// POST api/<RecipeController>
@@ -38,8 +38,9 @@ namespace RecipeApi.Controllers
 
 		// PUT api/<RecipeController>/5
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		public void Put(string name, [FromBody] Recipe recipe)
 		{
+			_recipeService.UpdateRecipe(name, recipe);
 		}
 
 		// DELETE api/<RecipeController>/5
