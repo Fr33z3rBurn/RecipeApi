@@ -5,6 +5,6 @@ namespace RecipeApi.Services
 	public interface IRecipeService
 	{
 		void CreateRecipe(Recipe recipe);
-		void DeleteRecipe(Guid id);
+		void DeleteRecipe(string name);
 	}
 }

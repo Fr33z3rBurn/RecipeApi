@@ -7,8 +7,8 @@ namespace RecipeApi.Models
 	{
 		[BsonId]
 		[BsonElement(elementName: "_id")]
-		[BsonGuidRepresentation(GuidRepresentation.Standard)]
-		public Guid Id { get; set; }
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string Id { get; set; }
 		[BsonGuidRepresentation(GuidRepresentation.Standard)]
 		public Guid OwnerUserId { get; set; }
 		public bool IsPoolRecipe { get; set; }

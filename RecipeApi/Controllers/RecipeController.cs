@@ -43,10 +43,10 @@ namespace RecipeApi.Controllers
 		}
 
 		// DELETE api/<RecipeController>/5
-		[HttpDelete("{id}")]
-		public void Delete(Guid id)
+		[HttpDelete("{name}")]
+		public void Delete(string name)
 		{
-			_recipeService.DeleteRecipe(id);
+			_recipeService.DeleteRecipe(name);
 		}
 	}
 }

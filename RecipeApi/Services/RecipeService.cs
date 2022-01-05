@@ -23,9 +23,9 @@ namespace RecipeApi.Services
 			recipes.InsertOne(recipe);
 		}
 
-		public void DeleteRecipe(Guid id)
+		public void DeleteRecipe(string name)
 		{
-			var recipe = recipes.Find(r => r.Id == id).FirstOrDefault();
+			var recipe = recipes.Find(r => r.RecipeName == name).FirstOrDefault();
 			
 			if (recipe != null)
 			{

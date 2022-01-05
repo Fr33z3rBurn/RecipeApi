@@ -8,7 +8,6 @@ namespace RecipeApi.Services
 		{
 			var db = new RecipeDb()
 			{
-				Id = recipe.Id,
 				OwnerUserId = recipe.OwnerUserId,
 				IsPoolRecipe = recipe.IsPoolRecipe,
 				CreatedFromPool	= recipe.CreatedFromPool,

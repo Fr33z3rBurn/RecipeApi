@@ -2,7 +2,7 @@
 {
 	public class Recipe
 	{
-		public Guid Id { get; set; }
+		public string Id { get; set; }
 		public Guid OwnerUserId { get; set; }
 		public bool IsPoolRecipe { get; set; }
 		public bool CreatedFromPool { get; set; }
