@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RecipeApi.Models.API;
+using RecipeApi.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,12 @@ namespace RecipeApi.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
+		private readonly IUserService _userService;
+
+		public UserController(IUserService userService)
+		{
+			_userService = userService;
+		}
 		// GET: api/<UserController>
 		[HttpGet]
 		public IEnumerable<string> Get()
@@ -24,8 +32,9 @@ namespace RecipeApi.Controllers
 
 		// POST api/<UserController>
 		[HttpPost]
-		public void Post([FromBody] string value)
+		public void Post([FromBody] RegisterUser registerUser)
 		{
+			_userService.CreateNewUser(registerUser);
 		}
 
 		// PUT api/<UserController>/5

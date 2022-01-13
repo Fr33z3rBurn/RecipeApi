@@ -1,25 +1,22 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using RecipeApi.Models;
 
 namespace RecipeApi.Services
 {
 	public class RecipeService : IRecipeService
 	{
-		private readonly IMongoCollection<RecipeDb> recipes;
+		private readonly IMongoCollection<RecipeDto> recipes;
 
 		public RecipeService(IRecipeDatabaseSettings settings)
 		{
 			var client = new MongoClient(settings.ConnectionString);
 			var database = client.GetDatabase(settings.DatabaseName);
-			recipes = database.GetCollection<RecipeDb>(settings.RecipesCollectionName);
+			recipes = database.GetCollection<RecipeDto>(settings.RecipesCollectionName);
 		}
 
 		public void CreateRecipe(Recipe recipeDto)
 		{
-			var recipe = RecipeServiceUtils.MapDtoToDb(recipeDto);
+			var recipe = RecipeServiceUtils.MapToDto(recipeDto);
 			recipes.InsertOne(recipe);
 		}
 
@@ -36,7 +33,7 @@ namespace RecipeApi.Services
 		public void UpdateRecipe(string name, Recipe recipeDto)
 		{
 			var existingRecipeId = recipes.Find(r => r.RecipeName == name).SingleOrDefault().Id;
-			var recipe = RecipeServiceUtils.MapDtoToDb(recipeDto);
+			var recipe = RecipeServiceUtils.MapToDto(recipeDto);
 			
 			recipes.ReplaceOne(r => r.Id == existingRecipeId, recipe);
 		}
@@ -45,7 +42,7 @@ namespace RecipeApi.Services
 		{
 			var recipe = recipes.Find(r => r.RecipeName == name).Single();
 			
-			return RecipeServiceUtils.MapToRecipeDto(recipe);
+			return RecipeServiceUtils.MapToRecipe(recipe);
 
 		}
 	}

@@ -4,9 +4,9 @@ namespace RecipeApi.Services
 {
 	internal static class RecipeServiceUtils
 	{
-		public static RecipeDb MapDtoToDb(Recipe recipe)
+		public static RecipeDto MapToDto(Recipe recipe)
 		{
-			var db = new RecipeDb()
+			var db = new RecipeDto()
 			{
 				Id = recipe.Id,
 				OwnerUserId = recipe.OwnerUserId,
@@ -28,7 +28,7 @@ namespace RecipeApi.Services
 			return db;
 		}
 
-		public static Recipe MapToRecipeDto(RecipeDb recipeDb)
+		public static Recipe MapToRecipe(RecipeDto recipeDb)
 		{
 			var dto = new Recipe()
 			{

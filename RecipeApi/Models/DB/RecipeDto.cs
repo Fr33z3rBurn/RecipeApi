@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace RecipeApi.Models
 {
-	public class RecipeDb
+	public class RecipeDto
 	{
 		[BsonId]
 		[BsonElement(elementName: "_id")]
