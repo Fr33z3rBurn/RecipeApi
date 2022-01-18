@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using RecipeApi.Models;
 using RecipeApi.Models.API;
+using System.Security.Cryptography;
 
 namespace RecipeApi.Services
 {
@@ -19,6 +20,27 @@ namespace RecipeApi.Services
 		{
 			var user = UserServiceUtils.MapRegisterToDto(registerUser);
 			users.InsertOne(user);
+		}
+
+		public bool AuthenticateUser(LoginUser loginUser)
+		{
+			var user = users.Find(x => x.Email == loginUser.Email).Single();
+
+			bool passwordCorrect = true;
+
+			using (var hmac = new HMACSHA512(user.PasswordSalt))
+			{
+				var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(loginUser.Password));
+				for (int i = 0; i < computedHash.Length; i++)
+				{
+					if (computedHash[i] != user.PasswordHash[i])
+					{
+						passwordCorrect = false;
+					}
+				}
+			}
+
+			return passwordCorrect;
 		}
 	}
 }
