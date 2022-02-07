@@ -48,5 +48,12 @@ namespace RecipeApi.Controllers
 		public void Delete(int id)
 		{
 		}
+
+		//POST api/<UserCOntroller>/authenticate
+		[HttpPost("authenticate")]
+		public bool Authenticate([FromBody] LoginUser loginUser)
+		{
+			return _userService.AuthenticateUser(loginUser);
+		}
 	}
 }

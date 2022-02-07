@@ -24,7 +24,7 @@ namespace RecipeApi.Services
 
 		public bool AuthenticateUser(LoginUser loginUser)
 		{
-			var user = users.Find(x => x.Email == loginUser.Email).Single();
+			var user = users.Find(x => x.Email == loginUser.Email).Single(); //tolower?
 
 			bool passwordCorrect = true;
 
