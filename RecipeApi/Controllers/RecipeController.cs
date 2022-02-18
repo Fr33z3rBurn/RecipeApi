@@ -31,14 +31,14 @@ namespace RecipeApi.Controllers
 
 		// POST api/<RecipeController>
 		[HttpPost]
-		public void Post([FromBody] Recipe recipe)
+		public void Post([FromBody] CreateRecipe recipe)
 		{
 			_recipeService.CreateRecipe(recipe);
 		}
 
 		// PUT api/<RecipeController>/5
 		[HttpPut("{id}")]
-		public void Put(string name, [FromBody] Recipe recipe)
+		public void Put(string name, [FromBody] CreateRecipe recipe)
 		{
 			_recipeService.UpdateRecipe(name, recipe);
 		}

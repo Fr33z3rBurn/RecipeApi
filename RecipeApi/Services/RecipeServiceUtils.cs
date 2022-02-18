@@ -4,11 +4,10 @@ namespace RecipeApi.Services
 {
 	internal static class RecipeServiceUtils
 	{
-		public static RecipeDto MapToDto(Recipe recipe)
+		public static RecipeDto MapToDto(CreateRecipe recipe)
 		{
 			var db = new RecipeDto()
 			{
-				Id = recipe.Id,
 				OwnerUserId = recipe.OwnerUserId,
 				IsPoolRecipe = recipe.IsPoolRecipe,
 				CreatedFromPool	= recipe.CreatedFromPool,

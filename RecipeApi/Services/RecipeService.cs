@@ -14,7 +14,7 @@ namespace RecipeApi.Services
 			recipes = database.GetCollection<RecipeDto>(settings.RecipesCollectionName);
 		}
 
-		public void CreateRecipe(Recipe recipeDto)
+		public void CreateRecipe(CreateRecipe recipeDto)
 		{
 			var recipe = RecipeServiceUtils.MapToDto(recipeDto);
 			recipes.InsertOne(recipe);
@@ -30,7 +30,7 @@ namespace RecipeApi.Services
 			}
 		}
 
-		public void UpdateRecipe(string name, Recipe recipeDto)
+		public void UpdateRecipe(string name, CreateRecipe recipeDto)
 		{
 			var existingRecipeId = recipes.Find(r => r.RecipeName == name).SingleOrDefault().Id;
 			var recipe = RecipeServiceUtils.MapToDto(recipeDto);
