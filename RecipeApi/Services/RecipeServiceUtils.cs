@@ -50,5 +50,35 @@ namespace RecipeApi.Services
 
 			return dto;
 		}
+
+		public static List<Recipe> MapToRecipeList(List<RecipeDto> recipeDbList)
+		{
+			var recipeList = new List<Recipe>();
+
+			foreach (var recipeDb in recipeDbList)
+			{
+				var dto = new Recipe()
+				{
+					Id = recipeDb.Id,
+					OwnerUserId = recipeDb.OwnerUserId,
+					IsPoolRecipe = recipeDb.IsPoolRecipe,
+					CreatedFromPool = recipeDb.CreatedFromPool,
+					RecipeName = recipeDb.RecipeName,
+					RecipeNationality = recipeDb.RecipeNationality,
+					Ingredients = recipeDb.Ingredients,
+					Steps = recipeDb.Steps,
+					PrepTimeMinutes = recipeDb.PrepTimeMinutes,
+					CookTimeMinutes = recipeDb.CookTimeMinutes,
+					ReadyInMinutes = recipeDb.ReadyInMinutes,
+					Creator = recipeDb.Creator,
+					Notes = recipeDb.Notes,
+					OriginalSource = recipeDb.OriginalSource,
+					ApprovalStatus = recipeDb.ApprovalStatus
+				};
+				recipeList.Add(dto);
+			}
+			
+			return recipeList;
+		}
 	}
 }

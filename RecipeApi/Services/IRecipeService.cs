@@ -8,5 +8,7 @@ namespace RecipeApi.Services
 		void DeleteRecipe(string name);
 		void UpdateRecipe(string name, CreateRecipe recipeDto);
 		Recipe GetRecipe(string name);
+		List<Recipe> SearchByName(string name);
+		Recipe GetRandomRecipe();
 	}
 }

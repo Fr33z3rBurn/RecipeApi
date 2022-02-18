@@ -22,11 +22,26 @@ namespace RecipeApi.Controllers
 			return new string[] { "value1", "value2" };
 		}
 
+		//TODO update to be get by id?
 		// GET api/<RecipeController>/5
 		[HttpGet("{name}")]
 		public Recipe Get(string name)
 		{
 			return _recipeService.GetRecipe(name);
+		}
+
+		// GET api/<RecipeController>/Search/name
+		[HttpGet("Search/{name}")]
+		public List<Recipe> SearchRecipeByName(string name)
+		{
+			return _recipeService.SearchByName(name);
+		}
+
+		// GET api/<RecipeController>/random
+		[HttpGet("random")]
+		public Recipe GetRandomRecipe()
+		{
+			return _recipeService.GetRandomRecipe();
 		}
 
 		// POST api/<RecipeController>

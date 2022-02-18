@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using RecipeApi.Models;
 
 namespace RecipeApi.Services
@@ -38,12 +39,31 @@ namespace RecipeApi.Services
 			recipes.ReplaceOne(r => r.Id == existingRecipeId, recipe);
 		}
 
+		public Recipe GetRandomRecipe()
+		{
+			//TODO make more performant way to do this
+			var Filter = Builders<RecipeDto>.Filter.Empty;
+			long count = recipes.CountDocuments(Filter);
+			var allRecipes = recipes.Find(Builders<RecipeDto>.Filter.Empty).ToList();
+
+			Random random = new Random();
+			int randomRecipeNumber = random.Next(0, Convert.ToInt32(count) - 1);
+
+			return RecipeServiceUtils.MapToRecipe(allRecipes[randomRecipeNumber]);
+		}
+
 		public Recipe GetRecipe(string name)
 		{
 			var recipe = recipes.Find(r => r.RecipeName == name).Single();
-			
-			return RecipeServiceUtils.MapToRecipe(recipe);
 
+			return RecipeServiceUtils.MapToRecipe(recipe);
+		}
+
+		public List<Recipe> SearchByName(string name)
+		{
+			var recipeList = recipes.Find(r => r.RecipeName.ToLower().Contains(name.ToLower())).ToList();
+
+			return RecipeServiceUtils.MapToRecipeList(recipeList);
 		}
 	}
 }

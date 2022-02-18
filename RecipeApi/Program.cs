@@ -3,17 +3,10 @@ using RecipeApi.Services;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var AllowSpecificOrigins = "_myAllowSpecificOrigins";
+var AllowAllOrigins = "_myAllowAllOrigins";
 // Add services to the container.
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                          builder.WithOrigins("http://localhost:3000");
-                      });
-});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
@@ -34,6 +27,17 @@ builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowAllOrigins,
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,7 +49,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(AllowAllOrigins);
 
 app.UseAuthorization();
 
