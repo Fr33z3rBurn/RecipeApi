@@ -44,7 +44,8 @@ namespace RecipeApi.Services
 			//TODO make more performant way to do this
 			var Filter = Builders<RecipeDto>.Filter.Empty;
 			long count = recipes.CountDocuments(Filter);
-			var allRecipes = recipes.Find(Builders<RecipeDto>.Filter.Empty).ToList();
+			//var allRecipes = recipes.Find(Builders<RecipeDto>.Filter.Empty).ToList();
+			var allRecipes = recipes.Find(Builders<RecipeDto>.Filter.Where(r => r.IsPoolRecipe == true)).ToList();
 
 			Random random = new Random();
 			int randomRecipeNumber = random.Next(0, Convert.ToInt32(count) - 1);
