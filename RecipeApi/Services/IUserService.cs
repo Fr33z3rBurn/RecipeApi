@@ -5,6 +5,6 @@ namespace RecipeApi.Services
 	public interface IUserService
 	{
 		void CreateNewUser(RegisterUser registerUser);
-		bool AuthenticateUser(LoginUser loginUser);
+		RecipeWebUser AuthenticateUser(LoginUser loginUser);
 	}
 }

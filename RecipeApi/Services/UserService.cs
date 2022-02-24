@@ -22,9 +22,18 @@ namespace RecipeApi.Services
 			users.InsertOne(user);
 		}
 
-		public bool AuthenticateUser(LoginUser loginUser)
+		public RecipeWebUser AuthenticateUser(LoginUser loginUser)
 		{
 			var user = users.Find(x => x.Email == loginUser.Email).Single(); //tolower?
+
+			var webuser = new RecipeWebUser()//TODO mapper
+			{
+				FirstName = user.FirstName,
+				LastName = user.LastName,
+				Email = user.Email,
+				Token = user.PasswordHash,
+				IsAdmin = user.IsAdmin,
+			};
 
 			bool passwordCorrect = true;
 
@@ -39,8 +48,11 @@ namespace RecipeApi.Services
 					}
 				}
 			}
-
-			return passwordCorrect;
+			if (passwordCorrect)
+			{
+				return webuser;
+			}
+			return new RecipeWebUser();//TODO Update
 		}
 	}
 }

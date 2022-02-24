@@ -51,7 +51,7 @@ namespace RecipeApi.Controllers
 
 		//POST api/<UserCOntroller>/authenticate
 		[HttpPost("authenticate")]
-		public bool Authenticate([FromBody] LoginUser loginUser)
+		public RecipeWebUser Authenticate([FromBody] LoginUser loginUser)
 		{
 			return _userService.AuthenticateUser(loginUser);
 		}
