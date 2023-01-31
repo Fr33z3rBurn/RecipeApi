@@ -18,6 +18,7 @@ namespace RecipeApi.Services
 		public void CreateRecipe(CreateRecipe recipeDto)
 		{
 			var recipe = RecipeServiceUtils.MapToDto(recipeDto);
+
 			recipes.InsertOne(recipe);
 		}
 
@@ -48,7 +49,7 @@ namespace RecipeApi.Services
 			var allRecipes = recipes.Find(Builders<RecipeDto>.Filter.Where(r => r.IsPoolRecipe == true)).ToList();
 
 			Random random = new Random();
-			int randomRecipeNumber = random.Next(0, Convert.ToInt32(count) - 1);
+			int randomRecipeNumber = random.Next(0, Convert.ToInt32(count));
 
 			return RecipeServiceUtils.MapToRecipe(allRecipes[randomRecipeNumber]);
 		}
